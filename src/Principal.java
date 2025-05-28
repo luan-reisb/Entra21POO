@@ -1,50 +1,41 @@
+import modelo.entidade.pessoa.Pessoa;
+import modelo.entidade.pessoa.empregado.diretor.Diretor;
+import modelo.entidade.pessoa.empregado.Empregado;
+import modelo.entidade.pessoa.empregado.professor.Professor;
+import modelo.excecao.pessoa.CpfInvalidoException;
+import modelo.excecao.pessoa.NomeInvalidoException;
+import modelo.excecao.pessoa.SobrenomeInvalidoException;
+
 public class Principal {
     public static void main(String[] args){
 
-        System.out.println("Dados da Turma");
-
-        System.out.println("\nProfessor:");
-
-        Professor professor = new Professor("Erick","Silva","123.456.789-05");
-
-        System.out.println("\nNome :" + professor.getNome());
-        System.out.println("Sobrenome :" + professor.getSobrenome());
-        System.out.println("CPF :" + professor.getCPF());
-
-        professor.realizarChamada();
+        try {
 
 
-        System.out.println("\nAlunos:");
+            Empregado[] empregados = new Empregado[3];
+            empregados[0] = new Professor("Juscelino", "Tem", "tem", 3000);
+            empregados[1] = new Diretor("Sonia", "Abraão", "fofoca", 5000);
+            empregados[2] = new Professor("fabio", "silva", "cpf", 3000);
 
-        Aluno aluno = new Aluno("Lucio","Morningstar","123.456.789-05");
+            for (Empregado empregado : empregados) {
+                System.out.println(empregado.calcularSalario());
+            }
+        }
 
-        System.out.println("\nNome :" + aluno.getNome());
-        System.out.println("Sobrenome :" + aluno.getSobrenome());
-        System.out.println("CPF :" + aluno.getCPF());
+            catch(NomeInvalidoException exception){
+                System.out.println(exception.getMessage());
+            }
 
-        aluno.responderChamada();
+            catch(SobrenomeInvalidoException exception){
+                System.out.println(exception.getMessage());
+            }
 
-        aluno.setNome("Devon");
-        aluno.setSobrenome("Zogratis");
-        aluno.setCPF("123.456.789-05");
+            catch(CpfInvalidoException exception){
+                exception.printStackTrace();
+        }
 
-        System.out.println("\nNome :" + aluno.getNome());
-        System.out.println("Sobrenome :" + aluno.getSobrenome());
-        System.out.println("CPF :" + aluno.getCPF());
-
-        aluno.responderChamada();
-
-        aluno.setNome("Linus");
-        aluno.setSobrenome("Torvalds");
-        aluno.setCPF("123.456.789-05");
-
-        System.out.println("\nNome :" + aluno.getNome());
-        System.out.println("Sobrenome :" + aluno.getSobrenome());
-        System.out.println("CPF :" + aluno.getCPF());
-
-        aluno.responderChamada();
-
-
-        System.out.println();
+        finally {
+            System.out.println("entrou");
+        }
     }
 }
